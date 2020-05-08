@@ -34,7 +34,7 @@ class TravelLocationsMapViewController: UIViewController {
         }
     
         addLongPressListenerToMapView()
-        //setupfetched
+        // setupfetched
         setupFetchedResultsController()
         
         // add annotations
@@ -44,7 +44,7 @@ class TravelLocationsMapViewController: UIViewController {
                 let longitude  = CLLocationDegrees(pin.longitude)
                 let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
                 
-                let annotation = MKPointAnnotation()
+                let annotation        = MKPointAnnotation()
                 annotation.coordinate = coordinate
 
                 mapView.addAnnotation(annotation)
@@ -54,6 +54,7 @@ class TravelLocationsMapViewController: UIViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         print("clearing selected annotations")
         let selectedAnnotations = mapView.selectedAnnotations
         for annotation in selectedAnnotations {
@@ -67,7 +68,6 @@ class TravelLocationsMapViewController: UIViewController {
         fetchRequest.sortDescriptors = [sortDescriptor]
 
         fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: dataController.viewContext, sectionNameKeyPath: nil, cacheName: nil)
-        
 
         do {
             try fetchedResultsController.performFetch()
@@ -144,6 +144,8 @@ class TravelLocationsMapViewController: UIViewController {
         if segue.identifier == "showPhotoAlbum" {
             let controller = segue.destination as! PhotoAlbumViewController
             controller.coordinate = selectedCoordinate
+            
+            self.navigationController?.navigationBar.backItem?.title = "MMOMO"
         }
     }
 }

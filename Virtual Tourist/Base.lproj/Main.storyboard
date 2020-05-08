@@ -92,11 +92,16 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="PLs-ha-THc"/>
                     </view>
-                    <navigationItem key="navigationItem" id="o9o-3n-Ycy"/>
+                    <navigationItem key="navigationItem" id="o9o-3n-Ycy">
+                        <barButtonItem key="backBarButtonItem" title=" " image="square.and.arrow.up.fill" catalog="system" id="oMQ-gD-gxS"/>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mYh-cp-9yB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1042" y="617"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="square.and.arrow.up.fill" catalog="system" width="115" height="128"/>
+    </resources>
 </document>

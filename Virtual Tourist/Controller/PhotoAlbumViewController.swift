@@ -17,6 +17,10 @@ class PhotoAlbumViewController: UIViewController {
     
 //    var fetchedResultsController: NSFetchedResultsController<Pin>!
     
-    
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.navigationController?.navigationBar.topItem?.title = "OK"
+    }
     
 }
