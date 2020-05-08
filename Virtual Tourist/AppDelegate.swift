@@ -11,18 +11,8 @@ import UIKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    func checkIfFirstLaunch() {
-        if UserDefaults.standard.bool(forKey: "HasLaunchedBefore") {
-            print("Naah we've seen mandem before doe!")
-        } else {
-            print("Come on! First time tings!")
-            UserDefaults.standard.set(false, forKey: "HasLaunchedBefore")
-        }
-    }
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        checkIfFirstLaunch()
         return true
     }
 

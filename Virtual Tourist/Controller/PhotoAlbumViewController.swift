@@ -8,7 +8,15 @@
 
 import Foundation
 import UIKit
+import MapKit
+import CoreData
 
 class PhotoAlbumViewController: UIViewController {
+    
+    var coordinate: CLLocationCoordinate2D!
+    
+//    var fetchedResultsController: NSFetchedResultsController<Pin>!
+    
+    
     
 }

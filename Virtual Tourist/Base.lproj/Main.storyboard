@@ -43,7 +43,7 @@
                     <navigationItem key="navigationItem" id="0Me-lO-Ewv"/>
                     <connections>
                         <outlet property="mapView" destination="ptW-30-Jdt" id="Ma6-dk-mfO"/>
-                        <segue destination="oVh-Zt-11f" kind="show" id="zaz-gY-N3M"/>
+                        <segue destination="zZi-4f-CXT" kind="show" identifier="showPhotoAlbum" id="0O8-ON-53X"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Oa3-Qp-7NH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -53,7 +53,7 @@
         <!--Photo Album View Controller-->
         <scene sceneID="wMt-Yu-aVh">
             <objects>
-                <viewController id="zZi-4f-CXT" customClass="PhotoAlbumViewController" customModule="Virtual_Tourist" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PhotoAlbumViewController" id="zZi-4f-CXT" customClass="PhotoAlbumViewController" customModule="Virtual_Tourist" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="tXd-Zc-dRY">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -96,24 +96,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mYh-cp-9yB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1011.5942028985507" y="1524.7767857142856"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="Db8-bZ-AS7">
-            <objects>
-                <navigationController id="oVh-Zt-11f" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="Zp9-JM-jX5"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="8gp-6b-zeC">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="zZi-4f-CXT" kind="relationship" relationship="rootViewController" id="ct5-5U-KxB"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="cE6-7o-eyy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1014" y="617"/>
+            <point key="canvasLocation" x="1042" y="617"/>
         </scene>
     </scenes>
 </document>
