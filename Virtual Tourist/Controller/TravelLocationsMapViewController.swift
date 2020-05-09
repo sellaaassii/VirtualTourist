@@ -50,7 +50,6 @@ class TravelLocationsMapViewController: UIViewController {
                 mapView.addAnnotation(annotation)
             }
         }
-        
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -74,7 +73,6 @@ class TravelLocationsMapViewController: UIViewController {
         } catch {
             fatalError("The fetch could not be performed: \(error.localizedDescription)")
         }
-
     }
 
     func setMapViewRegions() {
@@ -137,7 +135,6 @@ class TravelLocationsMapViewController: UIViewController {
         } catch {
             print("errrrrr \(error.localizedDescription)")
         }
-        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

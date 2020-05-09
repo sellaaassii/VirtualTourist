@@ -47,7 +47,8 @@ class PhotoAlbumViewController: UIViewController {
                 if let numberOfPhotos = Int(data.total) {
                     
                     if numberOfPhotos > 0 {
-                        
+                        self.photos = data.photo
+                        // create images from response
                     } else {
                         self.newCollectionButton.isEnabled = true
                     }
@@ -89,8 +90,17 @@ extension PhotoAlbumViewController: NSFetchedResultsControllerDelegate {
 extension PhotoAlbumViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         //
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCell", for: indexPath)
-        return UICollectionViewCell()
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoAlbumCollectionViewCell", for: indexPath) as! PhotoAlbumCollectionViewCell
+        
+        cell.activityIndicator.startAnimating()
+        
+        for photo in photos {
+            let urls = photo.urlString
+            
+        }
+        
+        return cell
+        
     }
     
     

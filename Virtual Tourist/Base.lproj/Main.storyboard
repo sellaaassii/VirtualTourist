@@ -76,22 +76,29 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="LiK-vZ-MeE" customClass="PhotoAlbumCollectionViewCell" customModule="Virtual_Tourist" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PhotoAlbumCollectionViewCell" id="LiK-vZ-MeE" customClass="PhotoAlbumCollectionViewCell" customModule="Virtual_Tourist" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="91" height="97"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Osv-Zt-GDW">
-                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="91" height="97"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="z8v-tG-4tw">
-                                                    <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="91" height="97"/>
                                                 </imageView>
+                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="Fcp-pB-mPZ">
+                                                    <rect key="frame" x="36" y="39" width="20" height="20"/>
+                                                </activityIndicatorView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="bottom" secondItem="z8v-tG-4tw" secondAttribute="bottom" id="5Kh-kr-MaZ"/>
+                                                <constraint firstItem="Fcp-pB-mPZ" firstAttribute="leading" secondItem="Osv-Zt-GDW" secondAttribute="leading" constant="36" id="HZw-Ix-p9L"/>
                                                 <constraint firstItem="z8v-tG-4tw" firstAttribute="leading" secondItem="Osv-Zt-GDW" secondAttribute="leading" id="LHJ-wv-XZU"/>
                                                 <constraint firstAttribute="trailing" secondItem="z8v-tG-4tw" secondAttribute="trailing" id="PtF-i0-UJb"/>
+                                                <constraint firstItem="Fcp-pB-mPZ" firstAttribute="top" secondItem="Osv-Zt-GDW" secondAttribute="top" constant="39" id="Siz-gV-5Ec"/>
                                                 <constraint firstItem="z8v-tG-4tw" firstAttribute="top" secondItem="Osv-Zt-GDW" secondAttribute="top" id="VyP-BW-HEJ"/>
+                                                <constraint firstAttribute="trailing" secondItem="Fcp-pB-mPZ" secondAttribute="trailing" constant="35" id="bBm-UG-BS9"/>
+                                                <constraint firstAttribute="bottom" secondItem="Fcp-pB-mPZ" secondAttribute="bottom" constant="38" id="zrG-hz-14x"/>
                                             </constraints>
                                         </collectionViewCellContentView>
                                     </collectionViewCell>

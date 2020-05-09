@@ -10,5 +10,6 @@ import Foundation
 import UIKit
 
 class PhotoAlbumCollectionViewCell: UICollectionViewCell {
-    
+    @IBOutlet weak var memeImageView: UIImageView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 }
