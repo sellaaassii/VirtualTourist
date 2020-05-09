@@ -95,6 +95,11 @@
                     <navigationItem key="navigationItem" id="o9o-3n-Ycy">
                         <barButtonItem key="backBarButtonItem" title=" " image="square.and.arrow.up.fill" catalog="system" id="oMQ-gD-gxS"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="collectionView" destination="c6a-5A-Zvc" id="g7D-bJ-bM9"/>
+                        <outlet property="mapView" destination="Bde-jQ-6Ok" id="7Yq-rY-pSl"/>
+                        <outlet property="newCollectionButton" destination="nBe-ra-hMx" id="Os3-bO-VbO"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mYh-cp-9yB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

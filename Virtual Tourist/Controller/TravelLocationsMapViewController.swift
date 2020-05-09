@@ -143,9 +143,16 @@ class TravelLocationsMapViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showPhotoAlbum" {
             let controller = segue.destination as! PhotoAlbumViewController
-            controller.coordinate = selectedCoordinate
-            
-            self.navigationController?.navigationBar.backItem?.title = "MMOMO"
+            controller.dataController = dataController
+
+            if let fetchedPins = fetchedResultsController.fetchedObjects {
+                for pin in fetchedPins {
+                    if pin.latitude == selectedCoordinate.latitude && pin.longitude == selectedCoordinate.longitude {
+                        controller.pin = pin
+                        break
+                    }
+                }
+            }
         }
     }
 }

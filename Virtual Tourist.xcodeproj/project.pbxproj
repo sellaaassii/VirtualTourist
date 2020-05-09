@@ -16,6 +16,9 @@
 		8F18A5AC2463937E00FB6FE7 /* PhotoAlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F18A5AB2463937E00FB6FE7 /* PhotoAlbumViewController.swift */; };
 		8F18A5AF2463941000FB6FE7 /* VTourist.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8F18A5AD2463941000FB6FE7 /* VTourist.xcdatamodeld */; };
 		8F18A5B12464E70800FB6FE7 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F18A5B02464E70800FB6FE7 /* DataController.swift */; };
+		8F18A5B62466447000FB6FE7 /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F18A5B52466447000FB6FE7 /* Client.swift */; };
+		8F18A5B924664EB100FB6FE7 /* PhotoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F18A5B824664EB100FB6FE7 /* PhotoResponse.swift */; };
+		8F18A5BB24664FF800FB6FE7 /* PhotosResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F18A5BA24664FF800FB6FE7 /* PhotosResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +33,9 @@
 		8F18A5AB2463937E00FB6FE7 /* PhotoAlbumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAlbumViewController.swift; sourceTree = "<group>"; };
 		8F18A5AE2463941000FB6FE7 /* VTourist.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = VTourist.xcdatamodel; sourceTree = "<group>"; };
 		8F18A5B02464E70800FB6FE7 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
+		8F18A5B52466447000FB6FE7 /* Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
+		8F18A5B824664EB100FB6FE7 /* PhotoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoResponse.swift; sourceTree = "<group>"; };
+		8F18A5BA24664FF800FB6FE7 /* PhotosResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosResponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +83,8 @@
 		8F18A5A8246392F300FB6FE7 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				8F18A5B724664D9500FB6FE7 /* Response */,
+				8F18A5B42466445E00FB6FE7 /* Client */,
 				8F18A5AD2463941000FB6FE7 /* VTourist.xcdatamodeld */,
 				8F18A5B02464E70800FB6FE7 /* DataController.swift */,
 			);
@@ -90,6 +98,23 @@
 				8F18A5AB2463937E00FB6FE7 /* PhotoAlbumViewController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		8F18A5B42466445E00FB6FE7 /* Client */ = {
+			isa = PBXGroup;
+			children = (
+				8F18A5B52466447000FB6FE7 /* Client.swift */,
+			);
+			path = Client;
+			sourceTree = "<group>";
+		};
+		8F18A5B724664D9500FB6FE7 /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				8F18A5B824664EB100FB6FE7 /* PhotoResponse.swift */,
+				8F18A5BA24664FF800FB6FE7 /* PhotosResponse.swift */,
+			);
+			path = Response;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -164,11 +189,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				8F18A5992462489500FB6FE7 /* TravelLocationsMapViewController.swift in Sources */,
+				8F18A5B62466447000FB6FE7 /* Client.swift in Sources */,
 				8F18A5B12464E70800FB6FE7 /* DataController.swift in Sources */,
+				8F18A5BB24664FF800FB6FE7 /* PhotosResponse.swift in Sources */,
 				8F18A5952462489500FB6FE7 /* AppDelegate.swift in Sources */,
 				8F18A5AF2463941000FB6FE7 /* VTourist.xcdatamodeld in Sources */,
 				8F18A5972462489500FB6FE7 /* SceneDelegate.swift in Sources */,
 				8F18A5AC2463937E00FB6FE7 /* PhotoAlbumViewController.swift in Sources */,
+				8F18A5B924664EB100FB6FE7 /* PhotoResponse.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
