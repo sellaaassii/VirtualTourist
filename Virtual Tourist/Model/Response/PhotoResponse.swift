@@ -18,6 +18,11 @@ struct PhotoResponse: Codable {
     let isPublic: Int
     let isFriend: Int
     let isFamily: Int
+    
+    var urlString: String {
+        let ret = "https://farm\(farm).staticflickr.com/\(server)/\(id)_\(secret).jpg"
+        return ret
+    }
 
     enum CodingKeys: String, CodingKey {
         case id

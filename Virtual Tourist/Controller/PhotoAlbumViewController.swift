@@ -16,6 +16,7 @@ class PhotoAlbumViewController: UIViewController {
     var fetchedResultsController: NSFetchedResultsController<Photo>!
     var pin: Pin!
     var dataController: DataController!
+    var photos:[PhotoResponse]!
 
     @IBOutlet weak var newCollectionButton: UIButton!
     @IBOutlet weak var mapView: MKMapView!
@@ -27,15 +28,33 @@ class PhotoAlbumViewController: UIViewController {
         super.viewDidLoad()
         self.navigationController?.navigationBar.topItem?.title = "OK"
         
-        print("le pin fame \(pin.latitude)")
+//        print("le pin fam \(pin.latitude ?? nil)")
         
         newCollectionButton.isEnabled = false
         
-        
+    
         //  download Flickr images associated with the latitude and longitude of the pin
         Client.getPhotosFromLocation(latitude: pin.latitude, longitude: pin.longitude) { data, error in
             print(data)
             print(error)
+            
+            guard error == nil else {
+                print("dat error thooo")
+                return
+            }
+
+            if let data = data {
+                if let numberOfPhotos = Int(data.total) {
+                    
+                    if numberOfPhotos > 0 {
+                        
+                    } else {
+                        self.newCollectionButton.isEnabled = true
+                    }
+                    
+                }
+            }
+            
         }
         
         // While the images are downloading, the photo album is in a temporary “downloading” state in which the New Collection button is disabled.
@@ -64,5 +83,25 @@ class PhotoAlbumViewController: UIViewController {
 }
 
 extension PhotoAlbumViewController: NSFetchedResultsControllerDelegate {
+    
+}
+
+extension PhotoAlbumViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        //
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCell", for: indexPath)
+        return UICollectionViewCell()
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        //
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        //
+        return 0
+    }
+    
     
 }

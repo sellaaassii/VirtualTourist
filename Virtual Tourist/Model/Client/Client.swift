@@ -9,7 +9,7 @@
 import Foundation
 
 class Client {
-    
+
     struct Auth {
         static var apiKey = ""
     }
@@ -33,7 +33,7 @@ class Client {
 
     class func getPhotosFromLocation(latitude: Double, longitude: Double, completion: @escaping (PhotosResponse?, Error?) -> Void) {
         let url = Endpoints.getPhotosFromLocation(longitude: longitude, latitude: latitude).url
-
+        
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
            guard let data = data else {
                DispatchQueue.main.async {
@@ -45,9 +45,9 @@ class Client {
            let decoder = JSONDecoder()
 
            do {
-               let responseObject = try decoder.decode(PhotosResponse.self, from: data)
+               let responseObject = try decoder.decode(FlickrAPIResponse.self, from: data)
                DispatchQueue.main.async {
-                   completion(responseObject, nil)
+                completion(responseObject.photos, nil)
                }
            } catch {
                DispatchQueue.main.async {

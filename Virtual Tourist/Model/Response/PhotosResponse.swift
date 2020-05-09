@@ -13,8 +13,7 @@ struct PhotosResponse: Codable {
     let pages: Int
     let perPage: Int
     let total: String
-    let photo: [PhotoResponse]?
-    let stat: String
+    let photo: [PhotoResponse]
     
     enum CodingKeys: String, CodingKey {
         case page
@@ -22,6 +21,5 @@ struct PhotosResponse: Codable {
         case perPage = "perpage"
         case total
         case photo
-        case stat
     }
 }
