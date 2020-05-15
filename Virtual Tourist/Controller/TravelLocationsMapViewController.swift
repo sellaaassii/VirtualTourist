@@ -15,15 +15,17 @@ class TravelLocationsMapViewController: UIViewController {
     @IBOutlet weak var mapView: MKMapView!
     
     var selectedCoordinate: CLLocationCoordinate2D!
-    
+
     var dataController: DataController!
     
     var fetchedResultsController: NSFetchedResultsController<Pin>!
     
+    var newPin: Pin!
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+
         mapView.delegate = self
 
         if UserDefaults.standard.bool(forKey: "HasLaunchedBefore") {
@@ -34,31 +36,36 @@ class TravelLocationsMapViewController: UIViewController {
         }
     
         addLongPressListenerToMapView()
-        // setupfetched
-        setupFetchedResultsController()
-        
-        // add annotations
-        if let pins = fetchedResultsController.fetchedObjects {
-            for pin in pins {
-                let latitude   = CLLocationDegrees(pin.latitude)
-                let longitude  = CLLocationDegrees(pin.longitude)
-                let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-                
-                let annotation        = MKPointAnnotation()
-                annotation.coordinate = coordinate
 
-                mapView.addAnnotation(annotation)
-            }
-        }
+        setupFetchedResultsController()
+
+        addAnnotationsToMapFromFetchedObjects()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print("clearing selected annotations")
         let selectedAnnotations = mapView.selectedAnnotations
+
         for annotation in selectedAnnotations {
             mapView.deselectAnnotation(annotation, animated: false)
         }
+
+        newPin = nil
+        
+        setupFetchedResultsController()
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        let selectedAnnotations = mapView.selectedAnnotations
+
+        for annotation in selectedAnnotations {
+            mapView.deselectAnnotation(annotation, animated: false)
+        }
+
+        try? dataController.viewContext.save()
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
     }
 
     func setupFetchedResultsController() {
@@ -75,20 +82,6 @@ class TravelLocationsMapViewController: UIViewController {
         }
     }
 
-    func setMapViewRegions() {
-        let region = mapView.region
-        let centerLongitude = region.center.longitude
-        let centerLatitude  = region.center.latitude
-        
-        let longitudinalMeters = region.span.longitudeDelta
-        let latitudinalMeters  = region.span.latitudeDelta
-        
-        UserDefaults.standard.set(centerLongitude, forKey: "CenterCoordinateLongitude")
-        UserDefaults.standard.set(centerLatitude, forKey: "CenterCoordinateLatitude")
-        UserDefaults.standard.set(latitudinalMeters, forKey: "RegionLatitudinalMetres")
-        UserDefaults.standard.set(longitudinalMeters, forKey: "RegionLongitudinalMetres")
-    }
-
     func initMapViewRegionFromDefaults() {
         let centerLongitude = UserDefaults.standard.double(forKey: "CenterCoordinateLongitude")
         let centerLatitude  = UserDefaults.standard.double(forKey: "CenterCoordinateLatitude")
@@ -101,6 +94,20 @@ class TravelLocationsMapViewController: UIViewController {
         let region = MKCoordinateRegion(center: centerCoordinate, span: span)
         
         mapView.setRegion(region, animated: true)
+    }
+
+    func setMapViewRegions() {
+        let region = mapView.region
+        let centerLongitude = region.center.longitude
+        let centerLatitude  = region.center.latitude
+        
+        let longitudinalMeters = region.span.longitudeDelta
+        let latitudinalMeters  = region.span.latitudeDelta
+        
+        UserDefaults.standard.set(centerLongitude, forKey: "CenterCoordinateLongitude")
+        UserDefaults.standard.set(centerLatitude, forKey: "CenterCoordinateLatitude")
+        UserDefaults.standard.set(latitudinalMeters, forKey: "RegionLatitudinalMetres")
+        UserDefaults.standard.set(longitudinalMeters, forKey: "RegionLongitudinalMetres")
     }
     
     func addLongPressListenerToMapView() {
@@ -118,37 +125,51 @@ class TravelLocationsMapViewController: UIViewController {
         
         mapView.addAnnotation(annotation)
 
-        addPinToDB(annotation: annotation)
+        let pin = Pin(context: dataController.viewContext)
+        pin.latitude  = coordinateFromPoint.latitude
+        pin.longitude = coordinateFromPoint.longitude
+        pin.page      = Int32(0)
+
+        newPin = pin
+
+        mapView.reloadInputViews()
+        addLongPressListenerToMapView()
     }
     
-    func addPinToDB(annotation: MKPointAnnotation) {
-        let coordinate = annotation.coordinate
-        
-        let pin = Pin(context: dataController.viewContext)
-        pin.latitude  = coordinate.latitude
-        pin.longitude = coordinate.longitude
-        
-        print("we are saving though")
-        
-        do {
-            try dataController.viewContext.save()
-        } catch {
-            print("errrrrr \(error.localizedDescription)")
+    func addAnnotationsToMapFromFetchedObjects() {
+        if let pins = fetchedResultsController.fetchedObjects {
+            for pin in pins {
+                let latitude   = CLLocationDegrees(pin.latitude)
+                let longitude  = CLLocationDegrees(pin.longitude)
+                let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+                
+                let annotation        = MKPointAnnotation()
+                annotation.coordinate = coordinate
+
+                mapView.addAnnotation(annotation)
+            }
         }
     }
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showPhotoAlbum" {
             let controller = segue.destination as! PhotoAlbumViewController
-            controller.dataController = dataController
+            controller.dataController     = dataController
+            controller.selectedCoordinate = selectedCoordinate
+            
+            if let pin = self.newPin {
+                controller.pin = pin
+            } else {
 
-            if let fetchedPins = fetchedResultsController.fetchedObjects {
-                for pin in fetchedPins {
-                    if pin.latitude == selectedCoordinate.latitude && pin.longitude == selectedCoordinate.longitude {
-                        controller.pin = pin
-                        break
+                if let fetchedPins = fetchedResultsController.fetchedObjects {
+                    for pin in fetchedPins {
+                        if pin.latitude == selectedCoordinate.latitude && pin.longitude == selectedCoordinate.longitude {
+                            controller.pin = pin
+                            break
+                        }
                     }
                 }
+
             }
         }
     }
@@ -156,7 +177,6 @@ class TravelLocationsMapViewController: UIViewController {
 
 extension TravelLocationsMapViewController:MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
-        print("region did change fam")
         setMapViewRegions()
     }
     
@@ -177,10 +197,9 @@ extension TravelLocationsMapViewController:MKMapViewDelegate {
     }
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        print("anotation has been sellected fam")
         let selectedAnnotation = mapView.selectedAnnotations[0]
-        selectedCoordinate = selectedAnnotation.coordinate
-        
+        selectedCoordinate     = selectedAnnotation.coordinate
+
         performSegue(withIdentifier: "showPhotoAlbum", sender: nil)
     }
 }

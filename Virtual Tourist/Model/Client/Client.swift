@@ -17,12 +17,12 @@ class Client {
     enum Endpoints {
         static let base = "https://api.flickr.com/services/rest/"
         
-        case getPhotosFromLocation(longitude: Double, latitude: Double)
+        case getPhotosFromLocation(longitude: Double, latitude: Double, page: Int)
         
         var stringValue: String {
             switch self {
-            case .getPhotosFromLocation(let longitude, let latitude):
-                return Endpoints.base + "?method=flickr.photos.search&api_key=\(Auth.apiKey)&lat=\(latitude)&lon=\(longitude)&per_page=30&format=json&nojsoncallback=1"
+            case .getPhotosFromLocation(let longitude, let latitude, let page):
+                return Endpoints.base + "?method=flickr.photos.search&api_key=\(Auth.apiKey)&lat=\(latitude)&lon=\(longitude)&page=\(page)&per_page=30&format=json&nojsoncallback=1"
             }
         }
 
@@ -31,8 +31,8 @@ class Client {
         }
     }
 
-    class func getPhotosFromLocation(latitude: Double, longitude: Double, completion: @escaping (PhotosResponse?, Error?) -> Void) {
-        let url = Endpoints.getPhotosFromLocation(longitude: longitude, latitude: latitude).url
+    class func getPhotosFromLocation(latitude: Double, longitude: Double, page: Int = 1, completion: @escaping ([PhotoResponse]?, Error?) -> Void) {
+        let url = Endpoints.getPhotosFromLocation(longitude: longitude, latitude: latitude, page: page).url
         
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
            guard let data = data else {
@@ -47,7 +47,7 @@ class Client {
            do {
                let responseObject = try decoder.decode(FlickrAPIResponse.self, from: data)
                DispatchQueue.main.async {
-                completion(responseObject.photos, nil)
+                completion(responseObject.photos.photo, nil)
                }
            } catch {
                DispatchQueue.main.async {
@@ -56,6 +56,21 @@ class Client {
            }
         }
 
+        task.resume()
+    }
+    
+    class func downloadPhotoFromURL(url: String, completion: @escaping (Data?, Error?) -> ()) {
+        let photoUrl = URL(string: url)!
+        let task = URLSession.shared.dataTask(with: photoUrl) { data, response, error in
+            guard let data = data else {
+                DispatchQueue.main.async {
+                    completion(nil, error)
+                }
+                return
+            }
+            
+            completion(data, nil)
+        }
         task.resume()
     }
 }

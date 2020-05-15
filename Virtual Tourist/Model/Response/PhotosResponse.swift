@@ -13,7 +13,7 @@ struct PhotosResponse: Codable {
     let pages: Int
     let perPage: Int
     let total: String
-    let photo: [PhotoResponse]
+    let photo: [PhotoResponse]?
     
     enum CodingKeys: String, CodingKey {
         case page
