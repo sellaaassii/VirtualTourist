@@ -74,7 +74,7 @@ class PhotoAlbumViewController: UIViewController {
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        try? dataController.viewContext.save()
+        dataController.save()
     }
 
     func getNewLocationData(latitude: Double, longitude: Double) {
@@ -108,7 +108,7 @@ class PhotoAlbumViewController: UIViewController {
 
             self.collectionView.dataSource = self
 
-            try? self.dataController.viewContext.save()
+            dataController.save()
             self.collectionView.reloadData()
             self.setDownloading(false)
         }
@@ -177,7 +177,7 @@ extension PhotoAlbumViewController: UICollectionViewDelegate, UICollectionViewDa
                             let photoToAdd = self?.images[indexPath.row]
                             self?.pin?.addToPhotos(photoToAdd!)
 
-                            try? self?.dataController.viewContext.save()
+                            self?.dataController.save()
                         }
                     }
                 }
@@ -193,7 +193,7 @@ extension PhotoAlbumViewController: UICollectionViewDelegate, UICollectionViewDa
         pin?.removeFromPhotos(photoToRemove)
         
         images.remove(at: indexPath.row)
-        try? dataController.viewContext.save()
+        dataController.save()
         
         self.collectionView.deleteItems(at: [indexPath])
     }

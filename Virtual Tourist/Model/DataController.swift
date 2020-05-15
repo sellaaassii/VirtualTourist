@@ -34,4 +34,8 @@ class DataController {
         viewContext.automaticallyMergesChangesFromParent = true
         viewContext.mergePolicy = NSMergePolicy.mergeByPropertyStoreTrump
     }
+    
+    func save() {
+        try? viewContext.save()
+    }
 }

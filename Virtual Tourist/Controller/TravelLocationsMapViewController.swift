@@ -64,9 +64,10 @@ class TravelLocationsMapViewController: UIViewController {
             mapView.deselectAnnotation(annotation, animated: false)
         }
 
-        try? dataController.viewContext.save()
+        dataController.save()
         self.navigationController?.setNavigationBarHidden(false, animated: false)
     }
+    
 
     func setupFetchedResultsController() {
         let fetchRequest:NSFetchRequest<Pin> = Pin.fetchRequest()
@@ -133,6 +134,7 @@ class TravelLocationsMapViewController: UIViewController {
         newPin = pin
 
         mapView.reloadInputViews()
+        dataController.save()
         addLongPressListenerToMapView()
     }
     
