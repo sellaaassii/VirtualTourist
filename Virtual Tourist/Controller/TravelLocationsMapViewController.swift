@@ -51,7 +51,7 @@ class TravelLocationsMapViewController: UIViewController {
         }
 
         newPin = nil
-        
+
         setupFetchedResultsController()
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
     }

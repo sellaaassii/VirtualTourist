@@ -108,7 +108,7 @@ class PhotoAlbumViewController: UIViewController {
 
             self.collectionView.dataSource = self
 
-            dataController.save()
+            self.dataController.save()
             self.collectionView.reloadData()
             self.setDownloading(false)
         }
