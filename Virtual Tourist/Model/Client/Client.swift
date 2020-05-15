@@ -17,12 +17,13 @@ class Client {
     enum Endpoints {
         static let base = "https://api.flickr.com/services/rest/"
         
-        case getPhotosFromLocation(longitude: Double, latitude: Double, page: Int)
+        case getPhotosFromLocation(longitude: Double, latitude: Double)
         
         var stringValue: String {
             switch self {
-            case .getPhotosFromLocation(let longitude, let latitude, let page):
-                return Endpoints.base + "?method=flickr.photos.search&api_key=\(Auth.apiKey)&lat=\(latitude)&lon=\(longitude)&page=\(page)&per_page=30&format=json&nojsoncallback=1"
+            case .getPhotosFromLocation(let longitude, let latitude):
+                let randomPage = Int.random(in: 0..<600)
+                return Endpoints.base + "?method=flickr.photos.search&api_key=\(Auth.apiKey)&lat=\(latitude)&lon=\(longitude)&page=\(randomPage)&per_page=30&format=json&nojsoncallback=1"
             }
         }
 
@@ -31,8 +32,8 @@ class Client {
         }
     }
 
-    class func getPhotosFromLocation(latitude: Double, longitude: Double, page: Int = 1, completion: @escaping ([PhotoResponse]?, Error?) -> Void) {
-        let url = Endpoints.getPhotosFromLocation(longitude: longitude, latitude: latitude, page: page).url
+    class func getPhotosFromLocation(latitude: Double, longitude: Double, completion: @escaping ([PhotoResponse]?, Error?) -> Void) {
+        let url = Endpoints.getPhotosFromLocation(longitude: longitude, latitude: latitude).url
         
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
            guard let data = data else {

@@ -82,10 +82,7 @@ class PhotoAlbumViewController: UIViewController {
         images.removeAll()
         collectionView.reloadData()
 
-        pin!.page += 1
-        let newPage = Int(pin!.page)
-
-        Client.getPhotosFromLocation(latitude: latitude, longitude: longitude, page: newPage) { photoArray, error in
+        Client.getPhotosFromLocation(latitude: latitude, longitude: longitude) { photoArray, error in
 
             guard error == nil else {
                 print("dat error thooo \(error!.localizedDescription)")

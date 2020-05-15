@@ -129,7 +129,6 @@ class TravelLocationsMapViewController: UIViewController {
         let pin = Pin(context: dataController.viewContext)
         pin.latitude  = coordinateFromPoint.latitude
         pin.longitude = coordinateFromPoint.longitude
-        pin.page      = Int32(0)
 
         newPin = pin
 
